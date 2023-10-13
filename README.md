@@ -8,12 +8,12 @@ The vision of this application is to have a fully functioning budget application
 
 ## User stories
 
-As a student, I want to see the available budget saved for the weekend. 
-As a 
-As a tenant, I want to see my total saving so that I can plan out my budget and have enough money to pay rent
-As a consumer, I want to see how much I have money I spent within a month
-As a consumer, I want well organized database of my spending
-As a spender and a saver, I want to see all my financial activities of the past few months. 
+As a student, I want to see the available budget so that I can have money saved for the weekend. 
+As a tenant, I want to see my total saving so that I can plan out my budget and have enough money to pay rent.
+As a consumer, I want to see how much I have money I spent within a month so that I control my spending.
+As a consumer, I want well organized database of my spending so that I can search my purchases.
+As a spender and a saver, I want to see all my financial activities of the past few months so that I can plan out how much money to save. 
+
 
 
 ## Task boards
