@@ -1,0 +1,161 @@
+.SIGN-IN {
+  background-color: #ffffff;
+  height: 844px;
+  position: relative;
+  width: 390px;
+}
+
+.SIGN-IN .forgot-password-sign {
+  height: 40px;
+  left: 76px;
+  position: absolute;
+  top: 727px;
+  width: 252px;
+}
+
+.SIGN-IN .overlap-group {
+  background-color: #d9d9d9;
+  border: 1px solid;
+  border-color: #000000;
+  height: 40px;
+  position: relative;
+  width: 250px;
+}
+
+.SIGN-IN .text-wrapper {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  height: 26px;
+  left: 30px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 5px;
+  width: 179px;
+}
+
+.SIGN-IN .sign-in-button {
+  height: 40px;
+  left: 76px;
+  position: absolute;
+  top: 596px;
+  width: 252px;
+}
+
+.SIGN-IN .PASSWORD-sign-in {
+  height: 30px;
+  left: 116px;
+  position: absolute;
+  top: 442px;
+  width: 172px;
+}
+
+.SIGN-IN .overlap {
+  background-color: #d9d9d9;
+  height: 30px;
+  position: relative;
+  width: 170px;
+}
+
+.SIGN-IN .div {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  height: 22px;
+  left: 37px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 4px;
+  width: 96px;
+}
+
+.SIGN-IN .EMAIL-sign-in {
+  height: 30px;
+  left: 116px;
+  position: absolute;
+  top: 387px;
+  width: 172px;
+}
+
+.SIGN-IN .text-wrapper-2 {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  height: 25px;
+  left: 39px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 3px;
+  width: 89px;
+}
+
+.SIGN-IN .overlap-2 {
+  height: 40px;
+  left: 76px;
+  position: absolute;
+  top: 662px;
+  width: 252px;
+}
+
+.SIGN-IN .create-account {
+  height: 40px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 252px;
+}
+
+.SIGN-IN .text-wrapper-3 {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  height: 24px;
+  left: 63px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 7px;
+  width: 121px;
+}
+
+.SIGN-IN .text-wrapper-4 {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  height: 24px;
+  left: 64px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 7px;
+  width: 121px;
+}
+
+.SIGN-IN .text-wrapper-5 {
+  -webkit-text-stroke: 1px #000000;
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 40px;
+  font-weight: 400;
+  height: 130px;
+  left: 75px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 99px;
+  width: 239px;
+}
