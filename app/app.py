@@ -1,9 +1,9 @@
 import db
+import uuid
 from flask import Flask, render_template, request, redirect, abort, url_for, make_response
+from event import Event
 
 app=Flask(__name__)
-#a global array of financial events 
-events=db.get_all_events()
 #routes 
 @app.route('/')
 def homepage():
@@ -31,7 +31,22 @@ def display_add_saving_screen():
 @app.route('/add-saving', methods=["POST"])
 def add_saving():
     #TODO: function to add a saving event into the database AND the array events
-    pass
+    event_type = "saving"
+    title = request.form['title']
+    time=request.form['time']
+    quantity = request.form['quantity']
+    description = request.form['description']
+    category = 0
+    new_event={
+        'event_type': event_type,
+        'title': title,
+        'time': time,
+        'quantity': quantity,
+        'description': description,
+        'category': category,
+    }
+    db.add_event(new_event)
+    return(redirect('/'))
 @app.route('/add-spending', methods=["GET"])
 def display_add_spending_screen():
     response=make_response(render_template("addSpending.html", events), 200)
@@ -40,12 +55,30 @@ def display_add_spending_screen():
 @app.route('/add-spending', methods=["POST"])
 def add_spending():
     #TODO: function to add a spending event into the database AND the array events
-    pass
-
-
-
-
-
+    event_type = "spending"
+    event_id = str(uuid.uuid4())
+    title = request.form['title']
+    time=request.form['time']
+    quantity = request.form['quantity']
+    description = request.form['description']
+    category = request.form['category']
+    new_event={
+        'event_id': event_id,
+        'event_type': event_type,
+        'title': title,
+        'time': time,
+        'quantity': quantity,
+        'description': description,
+        'category': category,
+    }
+    db.add_event(new_event)
+    return(redirect('/'))
+@app.route('/event', method=["GET"])
+def display_event():
+    event = request.args.get(event)
+    response=make_response(render_template("event.html", event), 200)
+    response.mimetype = "text/html"
+    return response 
 #run the app 
 if __name__ == '__main__':
     app.run(port=3000)
