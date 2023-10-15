@@ -49,7 +49,7 @@ def add_saving():
     return(redirect('/'))
 @app.route('/add-spending', methods=["GET"])
 def display_add_spending_screen():
-    response=make_response(render_template("addSpending.html", events), 200)
+    response=make_response(render_template("addSpending.html"), 200)
     response.mimetype = "text/html"
     return response 
 @app.route('/add-spending', methods=["POST"])
@@ -79,6 +79,17 @@ def display_event():
     response=make_response(render_template("event.html", event), 200)
     response.mimetype = "text/html"
     return response 
+@app.route('/modifyEvent', method=["GET"])
+def show_modify_event():
+    //TODO
+    event_id = request.args["id"]
+    db.
+    response=make_response(render_template("modify.html", event), 200)
+    response.mimetype = "text/html"
+    return response 
+@app.route('/modifyEvent',method=["POST"])
+def modify_event():
+    pass
 #run the app 
 if __name__ == '__main__':
     app.run(port=3000)
