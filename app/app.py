@@ -20,7 +20,7 @@ def homepage():
         pass
     if (filterr):
         pass
-    response=make_response(render_template("home.html", list_event), 200)
+    response=make_response(render_template("displayExpenses.html", expenses=list_event), 200)
     response.mimetype = "text/html"
     return response 
 @app.route('/add-saving', methods=["GET"])
@@ -33,11 +33,13 @@ def add_saving():
     #TODO: function to add a saving event into the database AND the array events
     event_type = "saving"
     title = request.form['title']
+    event_id = str(uuid.uuid4())
     time=request.form['time']
     quantity = request.form['quantity']
     description = request.form['description']
     category = 0
     new_event={
+        'event_id': event_id,
         'event_type': event_type,
         'title': title,
         'time': time,
@@ -73,23 +75,23 @@ def add_spending():
     }
     db.add_event(new_event)
     return(redirect('/'))
-@app.route('/event', method=["GET"])
+@app.route('/event', methods=["GET"])
 def display_event():
     event = request.args.get(event)
     response=make_response(render_template("event.html", event), 200)
     response.mimetype = "text/html"
     return response 
-@app.route('/modifyEvent', method=["GET"])
+@app.route('/modifyEvent', methods=["GET"])
 def show_modify_event():
-    //TODO
     event_id = request.args["id"]
-    db.
     response=make_response(render_template("modify.html", event), 200)
     response.mimetype = "text/html"
     return response 
-@app.route('/modifyEvent',method=["POST"])
+@app.route('/modifyEvent',methods=["POST"])
 def modify_event():
     pass
-#run the app 
+
+
+#run the app
 if __name__ == '__main__':
     app.run(port=3000)
