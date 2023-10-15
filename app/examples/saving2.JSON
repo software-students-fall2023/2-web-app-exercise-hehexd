@@ -1,0 +1,9 @@
+{
+    "event_id": 2,
+    "event_type": "saving",
+    "title": "saving2",
+    "time": "2023-10-02",
+    "quantity": 405.0,
+    "description": "second time saves money!",
+    "category": "none"
+}
