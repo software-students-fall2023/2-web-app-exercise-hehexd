@@ -50,3 +50,7 @@ def filter_by_time(events, start, end):
     
     # Convert the filter object to a list to return the result
     return list(filtered_events)
+def is_saving(event):
+    return (event.event_type == "saving")
+def is_spending(event):
+    return (event.event_type == "spending")
