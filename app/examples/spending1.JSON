@@ -1,0 +1,9 @@
+{
+    "event_id": 13,
+    "event_type": "spending",
+    "title": "spending1",
+    "time": "2023-10-05",
+    "quantity": 9999999.9,
+    "description": "pay for NYU",
+    "category": "school"
+}
