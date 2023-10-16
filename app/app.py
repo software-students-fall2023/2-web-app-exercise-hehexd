@@ -2,30 +2,34 @@ import db
 import uuid
 from flask import Flask, render_template, request, redirect, abort, url_for, make_response
 from event import Event
-
+import sort_and_filter as s
 app=Flask(__name__)
 #routes 
 @app.route('/')
-def homepage():
+def homepage(order = 1):
     display = request.args.get('display')
     sort = request.args.get('sortBy')
-    filterr = request.args.get('filter')
+    order = request.args.get('order')
+    start = request.args.get('start')
+    end = request.args.get('end')
+    list_event = db.get_all_events()
     if (display=="savingOnly"):
-        list_event=db.search_event_type("saving")
+        list_event=filter(list_event,s.is_saving)
     elif (display=="spendingOnly"):
-        list_event=db.search_event_type("saving")
-    else:
-        list_event = db.get_all_events()
+        list_event=filter(list_event,s.is_spending)
     if (sort):
-        pass
-    if (filterr):
-        pass
-    response=make_response(render_template("displayExpenses.html", expenses=list_event), 200)
+        if sort=="time":
+            list_event=s.sort_by_time(list_event,order)
+        elif sort == "amount":
+            list_event=s.sort_by_amount(list_event,order)
+    if (start and end):
+        list_event = s.filter_by_time(list_event,start, end)
+    response=make_response(render_template("displayExpenses.html", Acts=list_event), 200)
     response.mimetype = "text/html"
     return response 
 @app.route('/add-saving', methods=["GET"])
 def display_add_saving_screen():
-    response=make_response(render_template("addSaving.html", events), 200)
+    response=make_response(render_template("addSaving.html"), 200)
     response.mimetype = "text/html"
     return response 
 @app.route('/add-saving', methods=["POST"])
