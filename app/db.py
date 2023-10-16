@@ -1,7 +1,9 @@
 #this module defined interactions with the mongodb database 
 #its better to make all functions execute synchronously
-client = pymongo.MongoClient("mongodb://localhost:27017/")
-database = client["database"]
+from pymongo import MongoClient
+client = pymongo.MongoClient("mongodb+srv://2SEProjectDatabase:ThisIsThePassword123@cluster0.21yazmx.mongodb.net/")
+databaseclient = client["Cluster0"]
+database = databaseclient['events']
 def get_all_events():
     return list(database.find({}))
     #return an array of all events in the database 
