@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Search Activities{% endblock %}
+
+{% block content %}
+    <h2>Search Activities</h2>
+    <div>
+        <input type="text" id="searchInput" placeholder="Search by title or category">
+        <button onclick="searchActivities()">Search</button>
+        <br><br>
+        <div id="searchResults"></div>
+    </div>
+
+    <script>
+        function searchActivities() {
+            var searchTerm = document.getElementById("searchInput").value;
+            // Perform an AJAX request to search for activities
+        }
+    </script>
+{% endblock %}
