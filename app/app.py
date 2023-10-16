@@ -24,12 +24,12 @@ def homepage(order = 1):
             list_event=s.sort_by_amount(list_event,order)
     if (start and end):
         list_event = s.filter_by_time(list_event,start, end)
-    response=make_response(render_template("displayExpenses.html", expenses=list_event), 200)
+    response=make_response(render_template("displayExpenses.html", Acts=list_event), 200)
     response.mimetype = "text/html"
     return response 
 @app.route('/add-saving', methods=["GET"])
 def display_add_saving_screen():
-    response=make_response(render_template("addSaving.html", events), 200)
+    response=make_response(render_template("addSaving.html"), 200)
     response.mimetype = "text/html"
     return response 
 @app.route('/add-saving', methods=["POST"])
