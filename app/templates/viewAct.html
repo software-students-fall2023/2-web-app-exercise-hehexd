@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}View Activity{% endblock %}
+
+{% block content %}
+    <h2>Activity Information</h2>
+    <div>
+        <label for="time">Time:</label>
+        <span id="time">{{ act.time }}</span>
+        <br><br>
+        <label for="title">Title:</label>
+        <span id="title">{{ act.title }}</span>
+        <br><br>
+        <label for="quantity">Quantity:</label>
+        <span id="quantity">{{ act.quantity }}</span>
+        <br><br>
+        <label for="category">Category:</label>
+        <span id="category">{{ act.category }}</span>
+        <br><br>
+        <label for="description">Description:</label>
+        <span id="description">{{ act.description }}</span>
+        <br><br>
+        <label for="event_type">Type:</label>
+        <span id="event_type">{{ act.event_type }}</span>
+        <br><br>
+        <a href="/editAct/{{ act.event_id }}">Edit Activity</a>
+    </div>
+{% endblock %}
