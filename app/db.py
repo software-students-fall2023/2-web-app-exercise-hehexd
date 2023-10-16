@@ -37,6 +37,8 @@ def modify_event(property, new_val):
     database.update_many({}, {"$set": {property: new_val}})
     #update all events with property=property to have new_val 
     #property:str new_val:str
-def delete_event(property):
-    events_collection.delete_one({"id": event_id})
+def delete_event(event_id):
+    database.delete_one({"id": event_id})
     #delete an event with the specified property
+
+print(get_all_events())
