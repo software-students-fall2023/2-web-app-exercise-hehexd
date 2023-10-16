@@ -15,7 +15,21 @@
     </div>
 
     <div class="content">
-        {% block content %}{% endblock %}
+        {% block content %}
+        <form method="GET">
+            <label for="sortBy">Sort by:</label>
+            <select name="sortBy" id="sortBy">
+                <option value="date">Date</option>
+                <option value="amount">Amount</option>
+            </select>
+            <label for="order">Order:</label>
+            <select name="order" id="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+            <button type="submit">Sort</button>
+        </form>
+        {% endblock %}
     </div>
 </body>
 </html>
