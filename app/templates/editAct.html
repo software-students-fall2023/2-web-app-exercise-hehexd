@@ -3,7 +3,7 @@
 {% block title %}Edit act{% endblock %}
 
 {% block content %}
-    <h2>Edit act</h2>
+    <h2>Edit Activity</h2>
     <div>
         <label for="time">Time:</label>
         <input type="text" id="time" value="{{ act.time }}">
@@ -31,8 +31,8 @@
             <option value="income" {% if act.event_type == "income" %}selected{% endif %}>Income</option>
         </select>
         <br><br>
-        <button onclick="upAct()">Update Activity</button>
+        <button href="/viewAct">Update Activity</button>
         <br><br>
-        <button onclick="delAct()">Delete Activity</button>
+        <button href="/disAct">Delete Activity</button>
     </div>
 {% endblock %}
