@@ -43,4 +43,4 @@ def delete_event(event_id):
     database.delete_one({"id": event_id})
     #delete an event with the specified property
 
-print(get_all_events())
+#print(get_all_events())

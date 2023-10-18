@@ -19,12 +19,12 @@ def homepage(order = 1):
         list_event=filter(list_event,s.is_spending)
     if (sort):
         if sort=="time":
-            list_event=s.sort_by_time(list_event,order)
+            list_event=s.sort_by_time(list_event,int(order))
         elif sort == "amount":
-            list_event=s.sort_by_amount(list_event,order)
+            list_event=s.sort_by_amount(list_event,int(order))
     if (start and end):
         list_event = s.filter_by_time(list_event,start, end)
-    response=make_response(render_template("displayExpenses.html", Acts=list_event), 200)
+    response=make_response(render_template("disAct.html", Acts=list_event), 200)
     response.mimetype = "text/html"
     return response 
 @app.route('/add-saving', methods=["GET"])
