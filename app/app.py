@@ -94,7 +94,6 @@ def show_modify_event():
 @app.route('/modifyEvent',methods=["POST"])
 def modify_event():
     pass
-@app.route('')
 
 #run the app
 if __name__ == '__main__':
