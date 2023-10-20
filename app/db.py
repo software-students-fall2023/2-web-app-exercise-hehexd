@@ -52,6 +52,13 @@ def delete_event(event_id):
 def clear_collection():
     #erase everything in the db and start over! 
     pass
+def login(username, password):
+    # search in the username/databse collection 
+    # if username does not exist, return 0 
+    # if username exist but password does not match, return -1 
+    # if both are correct, return the pin associated with this username
+    # pin should be 5 digit number
+    pass
 #print(get_all_events())
 #(sproperty,val) = ("event_id", 2)
 #print(database.find_one({sproperty:val}))
