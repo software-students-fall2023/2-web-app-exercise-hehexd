@@ -106,6 +106,18 @@ def show_settings():
     response=make_response(render_template("setting.html"), 200)
     response.mimetype = "text/html"
     return response 
-#run the app
+@app.route('/login', methods=["GET"])
+def show_login():
+    response=make_response(render_template("login.html"), 200)
+    response.mimetype = "text/html"
+    return response 
+"""@app.route('/login', method=["POST"])"""
+"""def login():
+    username = request.form["USERNAME"]
+    passcode = request.form["PASSCODE"]
+    if (db.login(username, passcode)==1){
+        d
+    }"""
 if __name__ == '__main__':
-    app.run(port=3000)
+    app.run(host='0.0.0.0', port=3000)
+    #app.run(port=3000)
