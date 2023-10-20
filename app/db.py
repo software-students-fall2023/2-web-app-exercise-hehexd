@@ -59,6 +59,10 @@ def login(username, password):
     # if both are correct, return the pin associated with this username
     # pin should be 5 digit number
     pass
+def add_new_user(username, password):
+    #add username and password pairs to the database
+    #if username already exists, return -1 
+    pass
 #print(get_all_events())
 #(sproperty,val) = ("event_id", 2)
 #print(database.find_one({sproperty:val}))
