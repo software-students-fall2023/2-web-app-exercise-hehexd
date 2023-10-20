@@ -11,19 +11,19 @@
                 <th>Category</th>
                 <th>Description</th>
                 <th>Type</th>
-                <th>Edit</th>
+                <th>View/Edit</th>
             </tr>
         </thead>
         <form method="GET">
             <label for="sortBy">Sort by:</label>
             <select name="sortBy" id="sortBy">
-                <option value="date">Date</option>
+                <option value="time">Date</option>
                 <option value="amount">Amount</option>
             </select>
             <label for="order">Order:</label>
             <select name="order" id="order">
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
+                <option value=1>Ascending</option>
+                <option value=-1>Descending</option>
             </select>
             <button type="submit">Sort</button>
         </form>
@@ -36,7 +36,7 @@
                 <td>{{ act.category }}</td>
                 <td>{{ act.description }}</td>
                 <td>{{ act.event_type }}</td>
-                <td><a href="/editAct" class="button">Edit</a></td>
+                <td><a href="/act?id={{act.event_id}}" class="button">Detail</a></td>
             </tr>
             {% endfor %}
         </tbody>
