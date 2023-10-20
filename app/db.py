@@ -34,7 +34,7 @@ def add_event(event):
     #add an event into the database
     #input is an dictionary containing all properties 
     #event={
-    #    'id' : event_id
+    #    'event_id' : event_id
     #    'event_type': event_type,
     #    'title': title,
     #    'time': time,

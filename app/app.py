@@ -87,15 +87,29 @@ def display_event():
     response=make_response(render_template("viewAct.html", act=this_event), 200)
     response.mimetype = "text/html"
     return response 
-@app.route('/modifyEvent', methods=["GET"])
+@app.route('/editAct', methods=["GET"])
 def show_modify_event():
     event_id = request.args["id"]
-    response=make_response(render_template("modify.html", event), 200)
+    act = db.search_event("event_id",event_id)
+    response=make_response(render_template("editAct.html", act=act), 200)
     response.mimetype = "text/html"
     return response 
-@app.route('/modifyEvent',methods=["POST"])
+@app.route('/editAct',methods=["POST"])
 def modify_event():
-    pass
+    event_id = request.args["id"]
+    event_type = request.form['type']
+    title = request.form['title']
+    time=request.form['time']
+    quantity = request.form['quantity']
+    description = request.form['description']
+    category = request.form['category']
+    modify_event("event_type",event_type,event_id)
+    modify_event("title", title, event_id)
+    modify_event("time", time, event_id)
+    modify_event("quantity", quantity, event_id)
+    modify_event("description", description, event_id)
+    modify_event("category", category, event_id)
+    return 
 @app.route('/searchEvent', methods=["GET"])
 def show_search_event():
     response=make_response(render_template("srch.html"), 200)
@@ -111,13 +125,19 @@ def show_login():
     response=make_response(render_template("login.html"), 200)
     response.mimetype = "text/html"
     return response 
-"""@app.route('/login', method=["POST"])"""
-"""def login():
+@app.route('/login', method=["POST"])
+def login():
     username = request.form["USERNAME"]
     passcode = request.form["PASSCODE"]
-    if (db.login(username, passcode)==1){
-        d
-    }"""
+    if (db.login(username, passcode)==0){
+        print("username unfound")
+    }
+    elif (db.login(username,passcode)==-1){
+        print("wrong passcode")
+    }
+    else{
+        db.add_new_user()
+    }
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000)
     #app.run(port=3000)
