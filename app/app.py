@@ -55,7 +55,7 @@ def add_saving():
     return(redirect('/'))
 @app.route('/add-spending', methods=["GET"])
 def display_add_spending_screen():
-    response=make_response(render_template("addSpending.html"), 200)
+    response=make_response(render_template("addAct.html"), 200)
     response.mimetype = "text/html"
     return response 
 @app.route('/add-spending', methods=["POST"])
@@ -79,10 +79,12 @@ def add_spending():
     }
     db.add_event(new_event)
     return(redirect('/'))
-@app.route('/event', methods=["GET"])
+@app.route('/act', methods=["GET"])
 def display_event():
-    event = request.args.get(event)
-    response=make_response(render_template("event.html", event), 200)
+    event_id = request.args.get("id")
+    this_event= db.search_event("event_id",event_id)
+    print(this_event)
+    response=make_response(render_template("viewAct.html", act=this_event), 200)
     response.mimetype = "text/html"
     return response 
 @app.route('/modifyEvent', methods=["GET"])
@@ -94,7 +96,16 @@ def show_modify_event():
 @app.route('/modifyEvent',methods=["POST"])
 def modify_event():
     pass
-
+@app.route('/searchEvent', methods=["GET"])
+def show_search_event():
+    response=make_response(render_template("srch.html"), 200)
+    response.mimetype = "text/html"
+    return response 
+@app.route('/settings', methods=["GET"])
+def show_settings():
+    response=make_response(render_template("setting.html"), 200)
+    response.mimetype = "text/html"
+    return response 
 #run the app
 if __name__ == '__main__':
     app.run(port=3000)

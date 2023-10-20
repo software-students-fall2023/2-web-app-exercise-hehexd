@@ -9,16 +9,23 @@ database = databaseclient['account']
 def get_all_events():
     return list(database.find({}))
     #return an array of all events in the database 
-def search_event_type(type, category):
+def search_event(sproperty, val):
+    '''
     if type is not None:
         return list(database.find({"event_type": event_type}))
 
     if category is not None:
         return list(database.find({"category": category}))
+    '''
+    if (sproperty):
+        return database.find_one({sproperty: int(val)})
     #seach for a particular event of the specified type
     #return the event as an object 
     # type is either "saving" or "spending"
     #return an array of matched events 
+def search_event_list(sproperty, val):
+    if (sproperty):
+        return list(database.find({sproperty: int(val)}))
 def add_event(event):
     if database.find_one({"id": event["id"]}):
         print(f"Event with this ID {event['id']} already exists")
@@ -42,5 +49,9 @@ def modify_event(property, new_val):
 def delete_event(event_id):
     database.delete_one({"id": event_id})
     #delete an event with the specified property
-
+def clear_collection():
+    #erase everything in the db and start over! 
+    pass
 #print(get_all_events())
+#(sproperty,val) = ("event_id", 2)
+#print(database.find_one({sproperty:val}))
