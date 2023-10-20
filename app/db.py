@@ -42,8 +42,8 @@ def add_event(event):
     #    'description': description,
     #    'category': category,
     #}
-def modify_event(property, new_val):
-    database.update_many({}, {"$set": {property: new_val}})
+def modify_event(property, new_val, event_id):
+    database.update_many({"_id": event_id}, {"$set": {property: new_val}})
     #update all events with property=property to have new_val 
     #property:str new_val:str
 def delete_event(event_id):
