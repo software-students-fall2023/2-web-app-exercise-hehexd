@@ -13,7 +13,7 @@ def homepage(order = 1):
     order = request.args.get('order')
     start = request.args.get('start')
     end = request.args.get('end')
-    list_event = db.get_events_for_user("user",current_user)
+    list_event = db.get_events_for_user(current_user)
     if (sort):
         if sort=="time":
             list_event=s.sort_by_time(list_event,int(order))
@@ -56,16 +56,19 @@ def display_add_spending_screen():
     response=make_response(render_template("addAct.html"), 200)
     response.mimetype = "text/html"
     return response 
-@app.route('/add-spending', methods=["POST"])
+@app.route('/add-spending', methods=['POST'])
 def add_spending():
     #TODO: function to add a spending event into the database AND the array events
+    print("here")
     event_type = "spending"
     event_id = str(uuid.uuid4())
     title = request.form['title']
+    print(title)
     time=request.form['time']
     quantity = request.form['quantity']
     description = request.form['description']
     category = request.form['category']
+    print("tthere")
     new_event={
         'user': current_user,
         'event_id': event_id,
@@ -77,7 +80,8 @@ def add_spending():
         'category': category,
     }
     db.add_event(new_event)
-    return(redirect('/'))
+    print("there")
+    return redirect('/')
 @app.route('/act', methods=["GET"])
 def display_event():
     event_id = request.args.get("id")

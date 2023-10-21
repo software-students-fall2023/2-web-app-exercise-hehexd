@@ -29,7 +29,7 @@ def search_event_list(sproperty, val):
     if (sproperty):
         return list(database.find({sproperty: val}))
 def add_event(event):
-    if database.find_one({"id": event["id"]}):
+    if database.find_one({"event_id": event["event_id"]}):
         print(f"Event with this ID {event['id']} already exists")
         return
     database.insert_one(event)

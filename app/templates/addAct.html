@@ -5,17 +5,18 @@
 {% block content %}
     <h2>Add Expenses</h2>
     <div>
+        <form act="" method="POST">
         <label for="time">Time:</label>
-        <input type="text" id="time">
+        <input type="date" id="time" name="time">
         <br><br>
         <label for="title">Title:</label>
-        <input type="text" id="title">
+        <input type="text" id="title" name="title">
         <br><br>
         <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity">
+        <input type="number" id="quantity" name="quantity">
         <br><br>
         <label for="category">Category:</label>
-        <select id="category" onchange="toggleOtherInput()">
+        <select id="category" name ="category" onchange="toggleOtherInput()">
             <option value="food">Food</option>
             <option value="entertainment">Entertainment</option>
             <option value="bill payments">Bill Payments</option>
@@ -44,14 +45,15 @@
         }
         </script>
         <label for="description">Description:</label>
-        <input type="text" id="description">
+        <input type="text" id="description" name="description">
         <br><br>
         <label for="type">Type:</label>
-        <select id="type">
+        <select id="type" name="type">
             <option value="expense">Expense</option>
             <option value="income">Income</option>
         </select>
         <br><br>
-        <button href="/disAct">Add Expense</button>
+        <button type="submit">Add Expense</button>
+        </form>
     </div>
 {% endblock %}
