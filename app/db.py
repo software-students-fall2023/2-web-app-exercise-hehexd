@@ -61,25 +61,19 @@ def login(username, password):
     elif user["password"] != password:
         return -1
     else:
-        return user["pin"]
+        return 1
     # search in the username/databse collection 
     # if username does not exist, return 0 
     # if username exist but password does not match, return -1 
-    # if both are correct, return the pin associated with this username
-    # pin should be 5 digit number
 def add_new_user(username, password):
     if collection.find_one({"username": username}):
         return -1
-
-    # Generate a random 5-digit pin
-    pin = str(random.randint(10000, 99999))
     user = {
         "username": username,
         "password": password,
-        "pin": pin
     }
     collection.insert_one(user)
-    return pin
+    return 1
     #add username and password pairs to the database
     #if username already exists, return -1 
 def remove_user(username):
@@ -87,17 +81,24 @@ def remove_user(username):
 def get_password(username):
     return collection.find_one({"username":username})["password"]
 def update_password(username, password):
-    pass
+    collection.update_one({"username": username}, {"$set": {"password": password}})
 def filter_acts(category, type, title):
+    query = {}
+    if category:
+        query["category"] = category
+    if type:
+        query["type"] = type
+    if title:
+        query["title"] = {"$regex": title, "$options": "i"}
+    return list(database.find(query))
     #return all events that has the specified category, type, and whose title contains title (the argument 
     # category, type, title can be 0. in that case ignore 
-    pass
 def get_events_for_user(username):
     #get all activities associated with this userid. AND user named "admin"
-    pass
+    return list(database.find({"$or": [{"username": username}, {"username": "admin"}]}))
 def remove_one_user(username):
     #delete all activities associated with this user
-    pass
+    database.delete_many({"username": username})
 #print(get_all_events())
 #(sproperty,val) = ("event_id", 2)
 #print(database.find_one({sproperty:val}))
