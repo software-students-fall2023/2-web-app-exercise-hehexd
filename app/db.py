@@ -95,6 +95,9 @@ def filter_acts(category, type, title):
 def get_events_for_user(username):
     #get all activities associated with this userid. AND user named "admin"
     pass
+def remove_one_user(username):
+    #delete all activities associated with this user
+    pass
 #print(get_all_events())
 #(sproperty,val) = ("event_id", 2)
 #print(database.find_one({sproperty:val}))
