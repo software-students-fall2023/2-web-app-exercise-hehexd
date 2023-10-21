@@ -27,7 +27,7 @@ def search_event(sproperty, val):
     #return an array of matched events 
 def search_event_list(sproperty, val):
     if (sproperty):
-        return list(database.find({sproperty: int(val)}))
+        return list(database.find({sproperty: val}))
 def add_event(event):
     if database.find_one({"id": event["id"]}):
         print(f"Event with this ID {event['id']} already exists")
@@ -84,6 +84,17 @@ def add_new_user(username, password):
     #if username already exists, return -1 
 def remove_user(username):
     collection.delete_one({"username": username})
+def get_password(username):
+    return collection.find_one({"username":username})["password"]
+def update_password(username, password):
+    pass
+def filter_acts(category, type, title):
+    #return all events that has the specified category, type, and whose title contains title (the argument 
+    # category, type, title can be 0. in that case ignore 
+    pass
+def get_events_for_user(username):
+    #get all activities associated with this userid. AND user named "admin"
+    pass
 #print(get_all_events())
 #(sproperty,val) = ("event_id", 2)
 #print(database.find_one({sproperty:val}))
