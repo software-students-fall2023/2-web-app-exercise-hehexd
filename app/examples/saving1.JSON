@@ -1,0 +1,9 @@
+{
+    "event_id": 1,
+    "event_type": "saving",
+    "title": "saving1",
+    "time": "2023-10-01",
+    "quantity": 500.0,
+    "description": "first time saves money!",
+    "category": "none"
+}

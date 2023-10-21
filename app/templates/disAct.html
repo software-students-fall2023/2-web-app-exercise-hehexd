@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Activities</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Title</th>
+                <th>Quantity</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>View/Edit</th>
+            </tr>
+        </thead>
+        <form method="GET">
+            <label for="sortBy">Sort by:</label>
+            <select name="sortBy" id="sortBy">
+                <option value="time">Date</option>
+                <option value="amount">Amount</option>
+            </select>
+            <label for="order">Order:</label>
+            <select name="order" id="order">
+                <option value=1>Ascending</option>
+                <option value=-1>Descending</option>
+            </select>
+            <button type="submit">Sort</button>
+        </form>
+        <tbody>
+            {% for act in Acts %}
+            <tr>
+                <td>{{ act.time }}</td>
+                <td>{{ act.title }}</td>
+                <td>{{ act.quantity }}</td>
+                <td>{{ act.category }}</td>
+                <td>{{ act.description }}</td>
+                <td>{{ act.event_type }}</td>
+                <td><a href="/act?id={{act.event_id}}" class="button">Detail</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

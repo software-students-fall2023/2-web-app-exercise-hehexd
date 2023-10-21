@@ -1,0 +1,9 @@
+{
+    "event_id": 99,
+    "event_type": "spending",
+    "title": "spending2",
+    "time": "2023-9-01",
+    "quantity": 1.0,
+    "description": "one dollar pizza",
+    "category": "food"
+}
