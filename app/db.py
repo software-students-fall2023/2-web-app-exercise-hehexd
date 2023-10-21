@@ -6,6 +6,7 @@ uri = "mongodb+srv://2SEProjectDatabase:ThisIsThePassword123@cluster0.21yazmx.mo
 client = MongoClient(uri, tlsAllowInvalidCertificates=True, server_api=ServerApi('1'))
 databaseclient = client["account"]
 database = databaseclient['account']
+collection = databaseclient["Username+Password"]
 def get_all_events():
     return list(database.find({}))
     #return an array of all events in the database 
@@ -50,15 +51,26 @@ def delete_event(event_id):
     database.delete_one({"id": event_id})
     #delete an event with the specified property
 def clear_collection():
+    database.drop()
     #erase everything in the db and start over! 
-    pass
 def login(username, password):
-    # search in the username/databse collection 
-    # if username does not exist, return 0 
-    # if username exist but password does not match, return -1 
-    # if both are correct, return the pin associated with this username
-    # pin should be 5 digit number
-    pass
+    user = collection.find_one({"username": username})
+
+    if not user:
+        return 0
+    elif user["password"] != password:
+        return -1
+    else:
+        return user.get("pin", None)
+
 #print(get_all_events())
 #(sproperty,val) = ("event_id", 2)
 #print(database.find_one({sproperty:val}))
+def add_user(username, password, pin):
+    if collection.find_one({"username": username}):
+        print("Username already exists")
+        return
+    collection.insert_one({"username": username, "password": password, "pin": pin})
+
+def remove_user(username):
+    collection.delete_one({"username": username})
