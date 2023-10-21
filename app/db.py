@@ -92,6 +92,9 @@ def filter_acts(category, type, title):
     #return all events that has the specified category, type, and whose title contains title (the argument 
     # category, type, title can be 0. in that case ignore 
     pass
+def get_events_for_user(username):
+    #get all activities associated with this userid. AND user named "admin"
+    pass
 #print(get_all_events())
 #(sproperty,val) = ("event_id", 2)
 #print(database.find_one({sproperty:val}))

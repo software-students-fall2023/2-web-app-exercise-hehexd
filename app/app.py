@@ -12,7 +12,7 @@ def homepage(order = 1):
     order = request.args.get('order')
     start = request.args.get('start')
     end = request.args.get('end')
-    list_event = db.get_all_events()
+    list_event = db.get_events_for_user("user",current_user)
     if (sort):
         if sort=="time":
             list_event=s.sort_by_time(list_event,int(order))
@@ -101,12 +101,12 @@ def modify_event():
     quantity = request.form['quantity']
     description = request.form['description']
     category = request.form['category']
-    modify_event("event_type",event_type,event_id)
-    modify_event("title", title, event_id)
-    modify_event("time", time, event_id)
-    modify_event("quantity", quantity, event_id)
-    modify_event("description", description, event_id)
-    modify_event("category", category, event_id)
+    db.modify_event("event_type",event_type,event_id)
+    db.modify_event("title", title, event_id)
+    db.modify_event("time", time, event_id)
+    db.modify_event("quantity", quantity, event_id)
+    db.modify_event("description", description, event_id)
+    db.modify_event("category", category, event_id)
     return 
 @app.route('/searchEvent', methods=["GET"])
 def show_search_event():
@@ -150,7 +150,7 @@ def login():
         return response
     else:
         response=make_response(render_template("login.html", message="login success"), 200)
-        current_user=status
+        current_user=username
         return response
 @app.route('/register', methods=["GET"])
 def show_register():
