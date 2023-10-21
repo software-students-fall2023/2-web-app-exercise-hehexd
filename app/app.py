@@ -5,6 +5,7 @@ from event import Event
 import sort_and_filter as s
 app=Flask(__name__)
 #routes 
+current_user = None
 @app.route('/')
 def homepage(order = 1):
     sort = request.args.get('sortBy')
@@ -38,6 +39,7 @@ def add_saving():
     description = request.form['description']
     category = 0
     new_event={
+        'user': current_user,
         'event_id': event_id,
         'event_type': event_type,
         'title': title,
@@ -64,6 +66,7 @@ def add_spending():
     description = request.form['description']
     category = request.form['category']
     new_event={
+        'user': current_user,
         'event_id': event_id,
         'event_type': event_type,
         'title': title,
@@ -107,29 +110,64 @@ def modify_event():
     return 
 @app.route('/searchEvent', methods=["GET"])
 def show_search_event():
-    response=make_response(render_template("srch.html"), 200)
+    filtered_events=None
+    category= request.args.get("category") or 0
+    ttype = request.args.get("type") or 0
+    title = request.args.get("title") or 0 
+    filtered_events=db.filter_acts(category, ttype, title)
+    response=make_response(render_template("srch.html",acts=filtered_events), 200)
     response.mimetype = "text/html"
     return response 
 @app.route('/settings', methods=["GET"])
 def show_settings():
-    response=make_response(render_template("setting.html"), 200)
+    if (current_user):
+        password=db.get_password(current_user)
+    else:
+        password = 0
+    response=make_response(render_template("setting.html", password=password), 200)
     response.mimetype = "text/html"
     return response 
+@app.route('/settings', methods=["POST"])
+def update_settings():
+    new_password = request.form["new-password"]
+    db.update_password(current_user, new_password)
+    redirect('/')
 @app.route('/login', methods=["GET"])
 def show_login():
-    response=make_response(render_template("login.html"), 200)
+    response=make_response(render_template("login.html", message=0), 200)
     response.mimetype = "text/html"
     return response 
-@app.route('/login', method=["POST"])
+@app.route('/login', methods=["POST"])
 def login():
     username = request.form["USERNAME"]
     passcode = request.form["PASSCODE"]
-    if (db.login(username, passcode)==0):
-        print("username unfound")
-    elif (db.login(username,passcode)==-1):
-        print("wrong passcode")
+    status = db.login(username,passcode)
+    if (status==0):
+        response=make_response(render_template("login.html", message="username not found"), 200)
+        return response
+    elif (status==-1):
+        response=make_response(render_template("login.html", message="wrong password"), 200)
+        return response
     else:
-        pass
+        response=make_response(render_template("login.html", message="login success"), 200)
+        current_user=status
+        return response
+@app.route('/register', methods=["GET"])
+def show_register():
+    response=make_response(render_template("register.html", message=0), 200)
+    response.mimetype = "text/html"
+    return response 
+@app.route('/register', methods=["POST"])
+def register():
+    username = request.form["USERNAME"]
+    passcode = request.form["PASSCODE"]
+    status = db.add_new_user(username,passcode)
+    if status == -1:
+        response=make_response(render_template("register.html", message="user existed"), 200)
+        return response
+    else:
+        response=make_response(render_template("register.html", message="successfully registered!"), 200)
+        return response
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000)
     #app.run(port=3000)
