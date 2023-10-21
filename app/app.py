@@ -7,16 +7,11 @@ app=Flask(__name__)
 #routes 
 @app.route('/')
 def homepage(order = 1):
-    display = request.args.get('display')
     sort = request.args.get('sortBy')
     order = request.args.get('order')
     start = request.args.get('start')
     end = request.args.get('end')
     list_event = db.get_all_events()
-    if (display=="savingOnly"):
-        list_event=filter(list_event,s.is_saving)
-    elif (display=="spendingOnly"):
-        list_event=filter(list_event,s.is_spending)
     if (sort):
         if sort=="time":
             list_event=s.sort_by_time(list_event,int(order))
@@ -129,15 +124,12 @@ def show_login():
 def login():
     username = request.form["USERNAME"]
     passcode = request.form["PASSCODE"]
-    if (db.login(username, passcode)==0){
+    if (db.login(username, passcode)==0):
         print("username unfound")
-    }
-    elif (db.login(username,passcode)==-1){
+    elif (db.login(username,passcode)==-1):
         print("wrong passcode")
-    }
-    else{
-        db.add_new_user()
-    }
+    else:
+        pass
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000)
     #app.run(port=3000)
