@@ -6,6 +6,7 @@ import sort_and_filter as s
 app=Flask(__name__)
 #routes 
 current_user = None
+db.remove_one_user(current_user)
 @app.route('/')
 def homepage(order = 1):
     sort = request.args.get('sortBy')
