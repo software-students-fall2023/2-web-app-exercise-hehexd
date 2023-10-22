@@ -5,8 +5,8 @@ from event import Event
 import sort_and_filter as s
 app=Flask(__name__)
 #routes 
-current_user = "None"
-db.remove_one_user(current_user)
+current_user = "admin"
+#db.remove_one_user(current_user)
 def calculate_total_spending(Acts):
     total = 0 
     for act in Acts:
@@ -171,7 +171,7 @@ def modify_event():
     event_id = request.args.get("id")
     title = request.form.get('title')
     time=request.form.get('time')
-    quantity = request.form.get('quantity')
+    quantity = int(request.form.get('quantity'))
     description = request.form.get('description')
     category = request.form.get('category')
     print("get all requested args")
