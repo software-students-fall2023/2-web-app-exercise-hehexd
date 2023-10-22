@@ -45,6 +45,7 @@ def homepage(order = 1):
             list_event=s.sort_by_amount(list_event,int(order))
     if (start and end):
         list_event = s.filter_by_time(list_event,start, end)
+    #response = make_response(render_template('disAct.html',Acts=list_event))
     response=make_response(render_template("disAct.html", Acts=list_event, totalSpending=total_spending, totalSaving=total_saving, net=net_income), 200)
     response.mimetype = "text/html"
     return response 
@@ -167,21 +168,20 @@ def show_modify_event():
 @app.route('/editAct',methods=["POST"])
 def modify_event():
     print("edit act")
-    event_id = request.args["id"]
-    event_type = request.form['type']
-    title = request.form['title']
-    time=request.form['time']
-    quantity = request.form['quantity']
-    description = request.form['description']
-    category = request.form['category']
+    event_id = request.args.get("id")
+    title = request.form.get('title')
+    time=request.form.get('time')
+    quantity = request.form.get('quantity')
+    description = request.form.get('description')
+    category = request.form.get('category')
     print("get all requested args")
-    db.modify_event("event_type",event_type,event_id)
+    print(event_id,title,time,quantity,description,category)
     db.modify_event("title", title, event_id)
     db.modify_event("time", time, event_id)
     db.modify_event("quantity", quantity, event_id)
     db.modify_event("description", description, event_id)
     db.modify_event("category", category, event_id)
-    return 
+    return redirect('/')
 @app.route('/search', methods=["GET"])
 def show_search_event():
     filtered_events=None
@@ -195,7 +195,7 @@ def show_search_event():
     return response 
 @app.route('/settings', methods=["GET"])
 def show_settings():
-    if (current_user):
+    if (current_user!="None"):
         password=db.get_password(current_user)
     else:
         password = 0
