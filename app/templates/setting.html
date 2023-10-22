@@ -5,6 +5,7 @@
 {% block content %}
     <h2>Settings</h2>
     <div>
+        <form action="/setting" method="POST">
         <h3>Change Password</h3>
         <label for="currentPassword">Current Password:</label>
         <input type="password" id="currentPassword" required><br><br>
@@ -20,6 +21,7 @@
         <label for="confirmDelete">To delete your account, type 'DELETE' below:</label>
         <input type="text" id="confirmDelete" required><br><br>
         <button onclick="deleteAccount()">Delete Account</button>
+    </form>
     </div>
 
     <script>

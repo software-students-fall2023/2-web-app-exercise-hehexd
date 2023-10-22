@@ -1,20 +1,48 @@
+
 {% extends "base.html" %}
 
 {% block title %}Search Activities{% endblock %}
 
 {% block content %}
     <h2>Search Activities</h2>
-    <div>
-        <input type="text" id="searchInput" placeholder="Search by title or category">
-        <button onclick="searchActivities()">Search</button>
+    <form action="/search" method="get">
+        <div>
+            <input type="text" name="title" placeholder="Search by title">
+            <button type="submit">Search</button>
+        </div>
         <br><br>
-        <div id="searchResults"></div>
-    </div>
+        <div>
+            <input type="text" name="category" placeholder="Search by category">
+            <button type="submit">Search</button>
+        </div>
+    </form>
+    <br><br>
+    <div id="searchResults"></div>
 
-    <script>
-        function searchActivities() {
-            var searchTerm = document.getElementById("searchInput").value;
-            // Perform an AJAX request to search for activities
-        }
-    </script>
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Title</th>
+                <th>Quantity</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>View/Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for act in Acts %}
+            <tr>
+                <td>{{ act.time }}</td>
+                <td>{{ act.title }}</td>
+                <td>{{ act.quantity }}</td>
+                <td>{{ act.category }}</td>
+                <td>{{ act.description }}</td>
+                <td>{{ act.event_type }}</td>
+                <td><a href="/act?id={{act.event_id}}" class="button">Detail</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
