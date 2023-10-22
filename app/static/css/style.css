@@ -3,6 +3,7 @@ body {
     background-color: #4CAF50;
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s;
 }
 
 h1, h2, h3 {
@@ -107,6 +108,42 @@ tr:nth-child(even) {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+/* Night mode styles */
+.night-mode {
+    background-color: #333;
+    color: white;
+}
+
+.night-mode h1, .night-mode h2, .night-mode h3 {
+    color: white;
+}
+
+.night-mode .button {
+    background-color: #666;
+}
+
+.night-mode th {
+    background-color: #333;
+    color: white;
+}
+
+.night-mode tr:nth-child(odd) {
+    background-color: #444;
+}
+
+.night-mode tr:nth-child(even) {
+    background-color: #555;
+}
+
+.night-mode .dropdown-content {
+    background-color: #333;
+    color: white;
+}
+
+.night-mode .dropdown-content a:hover {
+    background-color: #2980b9;
 }
 
 @media screen and (max-width: 768px) {
