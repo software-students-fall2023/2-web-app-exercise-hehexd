@@ -19,4 +19,5 @@ The vision of this application is to have a fully functioning budget application
 
 ## Task boards
 
-See instructions. Delete this line and place a link to the task boards here.
+Sprint 1: https://github.com/orgs/software-students-fall2023/projects/14/views/3
+Sprint 2: https://github.com/orgs/software-students-fall2023/projects/55
