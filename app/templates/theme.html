@@ -3,23 +3,15 @@
 {% block title %}Setting{% endblock %}
 
 {% block content %}
-<form action="/settings" method="POST">
+
     <h2>Theme</h2>
     <label for="themeSwitch">Switch to Night Mode:</label>
     <input type="checkbox" id="themeSwitch">
-</form>
 
 <script>
-    const themeSwitch = document.getElementById("themeSwitch");
-
     themeSwitch.addEventListener("change", () => {
-        document.body.classList.toggle("night-mode", themeSwitch.checked);
-    });
-    
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-        document.body.classList.toggle("night-mode", savedTheme === "night");
-        themeSwitch.checked = savedTheme === "night";
-    }
+            document.body.classList.toggle("night-mode", themeSwitch.checked);
+            localStorage.setItem("theme", themeSwitch.checked ? "night" : "day");
+        });
 </script>
 {% endblock %}
