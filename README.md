@@ -15,9 +15,14 @@ The vision of this application is to have a fully functioning budget application
 5.As a spender and a saver, I want to see all my financial activities of the past few months so that I can plan out how much 
  money to save. 
 
-
-
 ## Task boards
 
 Sprint 1: https://github.com/orgs/software-students-fall2023/projects/14/views/3
 Sprint 2: https://github.com/orgs/software-students-fall2023/projects/55
+
+## Project set up instructions
+
+1.Make sure the following models are installed: Flask 3.0.0 and pymongo 4.5.0
+2.Make sure you have python3 on the machine to run the server
+3.Run the server that is located at app/app.py
+4.connect to the server (with browser on the same machine or any machine in the same local network)
