@@ -31,5 +31,13 @@
         {% block content %}
         {% endblock %}
     </div>
+    <script>
+        const themeSwitch = document.getElementById("themeSwitch");
+        const body = document.body;
+    
+        themeSwitch.addEventListener("change", () => {
+            body.classList.toggle("night-mode", themeSwitch.checked);
+        });
+    </script>
 </body>
 </html>

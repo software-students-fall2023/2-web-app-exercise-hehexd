@@ -113,11 +113,11 @@ tr:nth-child(even) {
 /* Night mode styles */
 .night-mode {
     background-color: #333;
-    color: white;
+    color: #ccc;
 }
 
 .night-mode h1, .night-mode h2, .night-mode h3 {
-    color: white;
+    color: #ccc;
 }
 
 .night-mode .button {
@@ -126,7 +126,7 @@ tr:nth-child(even) {
 
 .night-mode th {
     background-color: #333;
-    color: white;
+    color: #ccc;
 }
 
 .night-mode tr:nth-child(odd) {
@@ -138,8 +138,8 @@ tr:nth-child(even) {
 }
 
 .night-mode .dropdown-content {
-    background-color: #333;
-    color: white;
+    background-color: #ffffff;
+    color: #ccc;
 }
 
 .night-mode .dropdown-content a:hover {
