@@ -3,9 +3,25 @@
 {% block title %}Add Expenses{% endblock %}
 
 {% block content %}
+    <style>
+    #otherField {
+        display: none;
+    }
+    </style>
+    <script>
+        function toggleOtherInput() {
+            var category = document.getElementById("category");
+            var otherField = document.getElementById("otherField");
+            if (category.value === "other") {
+                otherField.style.display = "block";
+            } else {
+                otherField.style.display = "none";
+            }
+        }
+        </script>
     <h2>Add Expenses</h2>
     <div>
-        <form act="" method="POST">
+        <form action="/add-spending" method="POST">
         <label for="time">Time:</label>
         <input type="date" id="time" name="time">
         <br><br>
@@ -22,36 +38,10 @@
             <option value="bill payments">Bill Payments</option>
             <option value="other">Other</option>
         </select>
+        <input type="text" id="otherField" placeholder="Enter custom category" name = "othertext">
         <br><br>
-        <style>
-        #otherField {
-            display: none;
-        }
-        </style>
-        <div id="otherField">
-            <label for="other">Other:</label>
-            <input type="text" id="other" name="other" required placeholder="Enter custom category">
-            <br><br>
-        </div>
-        <script>
-        function toggleOtherInput() {
-            var category = document.getElementById("category");
-            var otherField = document.getElementById("otherField");
-            if (category.value === "other") {
-                otherField.style.display = "block";
-            } else {
-                otherField.style.display = "none";
-            }
-        }
-        </script>
         <label for="description">Description:</label>
         <input type="text" id="description" name="description">
-        <br><br>
-        <label for="type">Type:</label>
-        <select id="type" name="type">
-            <option value="expense">Expense</option>
-            <option value="income">Income</option>
-        </select>
         <br><br>
         <button type="submit">Add Expense</button>
         </form>
