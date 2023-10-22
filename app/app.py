@@ -194,6 +194,11 @@ def show_search_event():
     response.mimetype = "text/html"
     return response 
 @app.route('/settings', methods=["GET"])
+def theme():
+    response=make_response(render_template("theme.html", ), 200)
+    response.mimetype = "text/html"
+    return response 
+'''
 def show_settings():
     if (current_user!="None"):
         password=db.get_password(current_user)
@@ -201,7 +206,7 @@ def show_settings():
         password = 0
     response=make_response(render_template("setting.html", password=password), 200)
     response.mimetype = "text/html"
-    return response 
+    return response '''
 @app.route('/settings', methods=["POST"])
 def update_settings():
     if (request.form.get("delete")=="DELETE"):
