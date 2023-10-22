@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Setting{% endblock %}
+
+{% block content %}
+<form action="/settings" method="POST">
+    <h2>Theme</h2>
+    <label for="themeSwitch">Switch to Night Mode:</label>
+    <input type="checkbox" id="themeSwitch">
+</form>
+{% endblock %}
