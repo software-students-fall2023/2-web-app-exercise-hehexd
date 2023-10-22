@@ -94,7 +94,7 @@ def display_spendings():
     return response 
 @app.route('/add-saving', methods=["GET"])
 def display_add_saving_screen():
-    response=make_response(render_template("addAct.html"), 200)
+    response=make_response(render_template("addSav.html"), 200)
     response.mimetype = "text/html"
     return response 
 @app.route('/add-saving', methods=["POST"])
@@ -106,7 +106,7 @@ def add_saving():
     time=request.form['time']
     quantity = int(request.form['quantity'])
     description = request.form['description']
-    category = 0
+    category = request.form.get('category')
     new_event={
         'user': current_user,
         'event_id': event_id,
@@ -166,6 +166,7 @@ def show_modify_event():
     return response 
 @app.route('/editAct',methods=["POST"])
 def modify_event():
+    print("edit act")
     event_id = request.args["id"]
     event_type = request.form['type']
     title = request.form['title']
@@ -173,6 +174,7 @@ def modify_event():
     quantity = request.form['quantity']
     description = request.form['description']
     category = request.form['category']
+    print("get all requested args")
     db.modify_event("event_type",event_type,event_id)
     db.modify_event("title", title, event_id)
     db.modify_event("time", time, event_id)
@@ -180,14 +182,15 @@ def modify_event():
     db.modify_event("description", description, event_id)
     db.modify_event("category", category, event_id)
     return 
-@app.route('/searchEvent', methods=["GET"])
+@app.route('/search', methods=["GET"])
 def show_search_event():
     filtered_events=None
     category= request.args.get("category") or 0
     ttype = request.args.get("type") or 0
     title = request.args.get("title") or 0 
     filtered_events=db.filter_acts(category, ttype, title)
-    response=make_response(render_template("srch.html",acts=filtered_events), 200)
+    print(filtered_events)
+    response=make_response(render_template("srch.html",Acts=filtered_events), 200)
     response.mimetype = "text/html"
     return response 
 @app.route('/settings', methods=["GET"])
