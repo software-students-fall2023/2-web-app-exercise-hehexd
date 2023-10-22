@@ -20,7 +20,7 @@ def search_event(sproperty, val):
         return list(database.find({"category": category}))
     '''
     if (sproperty):
-        return database.find_one({sproperty: int(val)})
+        return database.find_one({sproperty: val})
     #seach for a particular event of the specified type
     #return the event as an object 
     # type is either "saving" or "spending"
@@ -45,11 +45,11 @@ def add_event(event):
     #    'category': category,
     #}
 def modify_event(property, new_val, event_id):
-    database.update_many({"_id": event_id}, {"$set": {property: new_val}})
+    database.update_many({"event_id": event_id}, {"$set": {property: new_val}})
     #update all events with property=property to have new_val 
     #property:str new_val:str
 def delete_event(event_id):
-    database.delete_one({"id": event_id})
+    database.delete_one({"event_id": event_id})
     #delete an event with the specified property
 def clear_collection():
     database.delete_many({})
@@ -95,10 +95,10 @@ def filter_acts(category, type, title):
     # category, type, title can be 0. in that case ignore 
 def get_events_for_user(username):
     #get all activities associated with this userid. AND user named "admin"
-    return list(database.find({"$or": [{"username": username}, {"username": "admin"}]}))
+    return list(database.find({"$or": [{"user": username}, {"user": "admin"}]}))
 def remove_one_user(username):
     #delete all activities associated with this user
-    database.delete_many({"username": username})
+    database.delete_many({"user": username})
 #print(get_all_events())
 #(sproperty,val) = ("event_id", 2)
 #print(database.find_one({sproperty:val}))
