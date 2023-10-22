@@ -8,9 +8,22 @@
 <body>
     <h1>Budget Tracker</h1>
     <div class="button-container">
-        <a href="/"><button class="button">Display Activities</button></a>
+        <div class="dropdown">
+            <button class="button dropdown-button">Display Activities</button>
+            <div class="dropdown-content">
+                <a href="/display-spendings">Spending Only</a>
+                <a href="/display-savings">Saving Only</a>
+                <a href="/">All Activities</a>
+            </div>
+        </div>
         <a href="/searchEvent"><button class="button">Search Activities</button></a>
-        <a href = "/add-spending"><button class="button">Add Activities</button></a>
+        <div class="dropdown">
+            <button class="button dropdown-button">Add Activities</button>
+            <div class="dropdown-content">
+                <a href="/add-spending">Spending</a>
+                <a href="/add-saving">Saving</a>
+            </div>
+        </div>
         <a href="/settings"><button class="button">Settings</button></a>
     </div>
 

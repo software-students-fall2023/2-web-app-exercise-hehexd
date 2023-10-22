@@ -5,7 +5,7 @@ from event import Event
 import sort_and_filter as s
 app=Flask(__name__)
 #routes 
-current_user = None
+current_user = "None"
 db.remove_one_user(current_user)
 def calculate_total_spending(Acts):
     total = 0 
@@ -34,6 +34,7 @@ def homepage(order = 1):
     start = request.args.get('start')
     end = request.args.get('end')
     list_event = db.get_events_for_user(current_user)
+    #list_event = db.get_all_events()
     total_spending = calculate_total_spending(list_event)
     total_saving = calculate_total_saving(list_event)
     net_income = calculate_net(list_event)
@@ -47,9 +48,53 @@ def homepage(order = 1):
     response=make_response(render_template("disAct.html", Acts=list_event, totalSpending=total_spending, totalSaving=total_saving, net=net_income), 200)
     response.mimetype = "text/html"
     return response 
+@app.route('/display-savings', methods=["GET"])
+def display_savings():
+    sort = request.args.get('sortBy')
+    order = request.args.get('order')
+    start = request.args.get('start')
+    end = request.args.get('end')
+    list_event = db.get_events_for_user(current_user)
+    list_event = list(filter(s.is_saving,list_event))
+    #list_event = db.get_all_events()
+    total_spending = calculate_total_spending(list_event)
+    total_saving = calculate_total_saving(list_event)
+    net_income = calculate_net(list_event)
+    if (sort):
+        if sort=="time":
+            list_event=s.sort_by_time(list_event,int(order))
+        elif sort == "amount":
+            list_event=s.sort_by_amount(list_event,int(order))
+    if (start and end):
+        list_event = s.filter_by_time(list_event,start, end)
+    response=make_response(render_template("disAct.html", Acts=list_event, totalSaving=total_saving), 200)
+    response.mimetype = "text/html"
+    return response 
+@app.route('/display-spendings', methods=["GET"])
+def display_spendings():
+    sort = request.args.get('sortBy')
+    order = request.args.get('order')
+    start = request.args.get('start')
+    end = request.args.get('end')
+    list_event = db.get_events_for_user(current_user)
+    list_event = list(filter(s.is_spending,list_event))
+    #list_event = db.get_all_events()
+    total_spending = calculate_total_spending(list_event)
+    total_saving = calculate_total_saving(list_event)
+    net_income = calculate_net(list_event)
+    if (sort):
+        if sort=="time":
+            list_event=s.sort_by_time(list_event,int(order))
+        elif sort == "amount":
+            list_event=s.sort_by_amount(list_event,int(order))
+    if (start and end):
+        list_event = s.filter_by_time(list_event,start, end)
+    response=make_response(render_template("disAct.html", Acts=list_event, totalSpending=total_spending), 200)
+    response.mimetype = "text/html"
+    return response 
 @app.route('/add-saving', methods=["GET"])
 def display_add_saving_screen():
-    response=make_response(render_template("addSaving.html"), 200)
+    response=make_response(render_template("addAct.html"), 200)
     response.mimetype = "text/html"
     return response 
 @app.route('/add-saving', methods=["POST"])
@@ -59,7 +104,7 @@ def add_saving():
     title = request.form['title']
     event_id = str(uuid.uuid4())
     time=request.form['time']
-    quantity = request.form['quantity']
+    quantity = int(request.form['quantity'])
     description = request.form['description']
     category = 0
     new_event={
@@ -82,14 +127,12 @@ def display_add_spending_screen():
 @app.route('/add-spending', methods=['POST'])
 def add_spending():
     #TODO: function to add a spending event into the database AND the array events
-    print("te")
     event_type = "spending"
     event_id = str(uuid.uuid4())
     title = request.form['title']
     time=request.form['time']
-    quantity = request.form['quantity']
+    quantity = int(request.form['quantity'])
     description = request.form['description']
-    print(description)
     if (request.form.get('othertext')):
         category=request.form['othertext']
     else:
@@ -105,7 +148,6 @@ def add_spending():
         'category': category,
     }
     db.add_event(new_event)
-    print("there")
     return redirect('/')
 @app.route('/act', methods=["GET"])
 def display_event():
@@ -202,6 +244,12 @@ def register():
     else:
         response=make_response(render_template("register.html", message="successfully registered!"), 200)
         return response
+@app.route('/delete', methods=["GET"])
+def delete_act():
+    event_id = request.args.get("id")
+    print(event_id)
+    db.delete_event(event_id)
+    return (redirect('/'))
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000)
     #app.run(port=3000)

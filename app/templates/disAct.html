@@ -2,9 +2,15 @@
 
 {% block content %}
     <h1>Activities</h1>
-    <p id="total-spending"> total spending: {{totalSpending}}</p>
-    <p id="total-saving"> total saving: {{totalSaving}}</p>
-    <p id="net-income"> net income: {{net}}</p>
+    {% if totalSpending %}
+        <p id="total-spending"> total spending: {{totalSpending}}</p>
+    {% endif %}
+    {% if totalSaving %}
+        <p id="total-saving"> total saving: {{totalSaving}}</p>
+    {% endif %}
+    {% if net %}
+        <p id="net-income"> net income: {{net}}</p>
+    {% endif %}
     <table>
         <thead>
             <tr>
@@ -67,7 +73,7 @@
             return total 
         }
         //const totalSpending = calculate_sum_spending(Acts);
-       //const totalSaving = calculate_sum_saving(Acts);
+        //const totalSaving = calculate_sum_saving(Acts);
         //const netIncome = calculate_net(Acts);
     </script>
 {% endblock %}
