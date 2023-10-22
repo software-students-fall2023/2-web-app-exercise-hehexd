@@ -198,60 +198,6 @@ def theme():
     response=make_response(render_template("theme.html", ), 200)
     response.mimetype = "text/html"
     return response 
-'''
-def show_settings():
-    if (current_user!="None"):
-        password=db.get_password(current_user)
-    else:
-        password = 0
-    response=make_response(render_template("setting.html", password=password), 200)
-    response.mimetype = "text/html"
-    return response '''
-@app.route('/settings', methods=["POST"])
-def update_settings():
-    if (request.form.get("delete")=="DELETE"):
-        db.remove_one_user(current_user)
-        current_user=None
-        return (redirect('/'))
-    new_password = request.form["new-password"]
-    db.update_password(current_user, new_password)
-    return (redirect('/'))
-@app.route('/login', methods=["GET"])
-def show_login():
-    response=make_response(render_template("login.html", message=0), 200)
-    response.mimetype = "text/html"
-    return response 
-@app.route('/login', methods=["POST"])
-def login():
-    username = request.form["USERNAME"]
-    passcode = request.form["PASSCODE"]
-    status = db.login(username,passcode)
-    if (status==0):
-        response=make_response(render_template("login.html", message="username not found"), 200)
-        return response
-    elif (status==-1):
-        response=make_response(render_template("login.html", message="wrong password"), 200)
-        return response
-    else:
-        response=make_response(render_template("login.html", message="login success"), 200)
-        current_user=username
-        return response
-@app.route('/register', methods=["GET"])
-def show_register():
-    response=make_response(render_template("register.html", message=0), 200)
-    response.mimetype = "text/html"
-    return response 
-@app.route('/register', methods=["POST"])
-def register():
-    username = request.form["USERNAME"]
-    passcode = request.form["PASSCODE"]
-    status = db.add_new_user(username,passcode)
-    if status == -1:
-        response=make_response(render_template("register.html", message="user existed"), 200)
-        return response
-    else:
-        response=make_response(render_template("register.html", message="successfully registered!"), 200)
-        return response
 @app.route('/delete', methods=["GET"])
 def delete_act():
     event_id = request.args.get("id")
