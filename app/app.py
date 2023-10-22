@@ -48,6 +48,50 @@ def homepage(order = 1):
     response=make_response(render_template("disAct.html", Acts=list_event, totalSpending=total_spending, totalSaving=total_saving, net=net_income), 200)
     response.mimetype = "text/html"
     return response 
+@app.route('/display-savings', methods=["GET"])
+def display_savings():
+    sort = request.args.get('sortBy')
+    order = request.args.get('order')
+    start = request.args.get('start')
+    end = request.args.get('end')
+    list_event = db.get_events_for_user(current_user)
+    list_event = list(filter(s.is_saving,list_event))
+    #list_event = db.get_all_events()
+    total_spending = calculate_total_spending(list_event)
+    total_saving = calculate_total_saving(list_event)
+    net_income = calculate_net(list_event)
+    if (sort):
+        if sort=="time":
+            list_event=s.sort_by_time(list_event,int(order))
+        elif sort == "amount":
+            list_event=s.sort_by_amount(list_event,int(order))
+    if (start and end):
+        list_event = s.filter_by_time(list_event,start, end)
+    response=make_response(render_template("disAct.html", Acts=list_event, totalSaving=total_saving), 200)
+    response.mimetype = "text/html"
+    return response 
+@app.route('/display-spendings', methods=["GET"])
+def display_spendings():
+    sort = request.args.get('sortBy')
+    order = request.args.get('order')
+    start = request.args.get('start')
+    end = request.args.get('end')
+    list_event = db.get_events_for_user(current_user)
+    list_event = list(filter(s.is_spending,list_event))
+    #list_event = db.get_all_events()
+    total_spending = calculate_total_spending(list_event)
+    total_saving = calculate_total_saving(list_event)
+    net_income = calculate_net(list_event)
+    if (sort):
+        if sort=="time":
+            list_event=s.sort_by_time(list_event,int(order))
+        elif sort == "amount":
+            list_event=s.sort_by_amount(list_event,int(order))
+    if (start and end):
+        list_event = s.filter_by_time(list_event,start, end)
+    response=make_response(render_template("disAct.html", Acts=list_event, totalSpending=total_spending), 200)
+    response.mimetype = "text/html"
+    return response 
 @app.route('/add-saving', methods=["GET"])
 def display_add_saving_screen():
     response=make_response(render_template("addAct.html"), 200)
