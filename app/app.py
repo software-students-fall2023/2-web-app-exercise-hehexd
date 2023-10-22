@@ -7,14 +7,36 @@ app=Flask(__name__)
 #routes 
 current_user = None
 db.remove_one_user(current_user)
+def calculate_total_spending(Acts):
+    total = 0 
+    for act in Acts:
+        if act['event_type']=="spending":
+            total+= act['quantity']
+    return total 
+def calculate_total_saving(Acts):
+    total = 0 
+    for act in Acts:
+        if act['event_type']=="saving":
+            total+= act['quantity']
+    return total 
+def calculate_net(Acts):
+    total = 0 
+    for act in Acts:
+        if act['event_type']=="saving":
+            total+= act['quantity']
+        else:
+            total-=act['quantity']
+    return total 
 @app.route('/')
 def homepage(order = 1):
     sort = request.args.get('sortBy')
     order = request.args.get('order')
     start = request.args.get('start')
     end = request.args.get('end')
-    list_event=db.get_all_events()
-    #list_event = db.get_events_for_user(current_user)
+    list_event = db.get_events_for_user(current_user)
+    total_spending = calculate_total_spending(list_event)
+    total_saving = calculate_total_saving(list_event)
+    net_income = calculate_net(list_event)
     if (sort):
         if sort=="time":
             list_event=s.sort_by_time(list_event,int(order))
@@ -22,7 +44,7 @@ def homepage(order = 1):
             list_event=s.sort_by_amount(list_event,int(order))
     if (start and end):
         list_event = s.filter_by_time(list_event,start, end)
-    response=make_response(render_template("disAct.html", Acts=list_event), 200)
+    response=make_response(render_template("disAct.html", Acts=list_event, totalSpending=total_spending, totalSaving=total_saving, net=net_income), 200)
     response.mimetype = "text/html"
     return response 
 @app.route('/add-saving', methods=["GET"])
@@ -137,9 +159,13 @@ def show_settings():
     return response 
 @app.route('/settings', methods=["POST"])
 def update_settings():
+    if (request.form.get("delete")=="DELETE"):
+        db.remove_one_user(current_user)
+        current_user=None
+        return (redirect('/'))
     new_password = request.form["new-password"]
     db.update_password(current_user, new_password)
-    redirect('/')
+    return (redirect('/'))
 @app.route('/login', methods=["GET"])
 def show_login():
     response=make_response(render_template("login.html", message=0), 200)
