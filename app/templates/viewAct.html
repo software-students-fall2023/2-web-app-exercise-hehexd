@@ -5,6 +5,7 @@
 {% block content %}
     <h2>Activity Information</h2>
     <div>
+        <form action="/act" method="get">
         <label for="time">Time:</label>
         <span id="time">{{ act.time }}</span>
         <br><br>
@@ -24,5 +25,6 @@
         <span id="event_type">{{ act.event_type }}</span>
         <br><br>
         <a href="/editAct?id={{ act.event_id }}">Edit Activity</a>
+    </form>
     </div>
 {% endblock %}

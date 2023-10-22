@@ -5,6 +5,7 @@
 {% block content %}
     <h2>Edit Activity</h2>
     <div>
+        <form action="/editAct" method="POST">
         <label for="time">Time:</label>
         <input type="text" id="time" value="{{ act.time }}">
         <br><br>
@@ -34,5 +35,6 @@
         <button href="/viewAct">Update Activity</button>
         <br><br>
         <a href="/delete?id={{act.event_id}}"><button>Delete Activity</button></a>
+    </form>
     </div>
 {% endblock %}
