@@ -2,6 +2,9 @@
 
 {% block content %}
     <h1>Activities</h1>
+    <p id="total-spending"> total spending: {{totalSpending}}</p>
+    <p id="total-saving"> total saving: {{totalSaving}}</p>
+    <p id="net-income"> net income: {{net}}</p>
     <table>
         <thead>
             <tr>
@@ -41,4 +44,30 @@
             {% endfor %}
         </tbody>
     </table>
+    <script>
+        function calculate_sum_spending(acts){
+            let total = 0 
+            for (const act of acts){
+                total += (act.event_type==="spending")? act.quantity : 0;
+            }
+            return total 
+        }
+        function calculate_sum_saving(acts){
+            let total = 0 
+            for (const act of acts){
+                total += (act.event_type==="saving")? act.quantity : 0;
+            }
+            return total 
+        }
+        function calculate_net(acts){
+            let total = 0 
+            for (const act of acts){
+                total += (act.event_type==="saving")? act.quantity : -act.quantity;
+            }
+            return total 
+        }
+        //const totalSpending = calculate_sum_spending(Acts);
+       //const totalSaving = calculate_sum_saving(Acts);
+        //const netIncome = calculate_net(Acts);
+    </script>
 {% endblock %}
