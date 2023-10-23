@@ -5,8 +5,8 @@ from event import Event
 import sort_and_filter as s
 app=Flask(__name__)
 #routes 
-current_user = "admin"
-#db.remove_one_user(current_user)
+current_user = "user"
+
 def calculate_total_spending(Acts):
     total = 0 
     for act in Acts:
